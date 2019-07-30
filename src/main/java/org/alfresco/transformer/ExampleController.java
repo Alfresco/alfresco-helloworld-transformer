@@ -127,7 +127,6 @@ public class ExampleController extends AbstractTransformerController
      * @param sourceMultipartFile ACS will always provide the source file
      * @param targetExtension ACS will always provide the target extension
      * @param language ACS will provide any additional parameters defined as options in resources/engine_config.json
-     * @param testDelay
      * @return response body including the result of the transformation
      */
     @PostMapping(value = "/transform", consumes = MULTIPART_FORM_DATA_VALUE)
