@@ -1,0 +1,23 @@
+{
+  "transformOptions":
+  {
+    "exampleOptions":
+    [
+      {"value": {"name": "language"}}
+    ]
+  },
+  "transformers":
+  [
+    {
+      "transformerName": "exampleTransformer",
+      "supportedSourceAndTargetList":
+      [
+        {"sourceMediaType": "text/plain",  "targetMediaType": "text/html"  }
+      ],
+      "transformOptions":
+      [
+        "exampleOptions"
+      ]
+    }
+  ]
+}
