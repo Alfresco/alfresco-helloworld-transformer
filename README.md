@@ -35,3 +35,4 @@ docker run -d -p 8099:8090 --name alfresco-helloworld-transformer alfresco/alfre
 it might be helpful to run it as such during development by either executing `mvn spring-boot:run`
  or `java -jar target/alfresco-helloworld-transformer-{version}.jar` in the project directory*
 
+
