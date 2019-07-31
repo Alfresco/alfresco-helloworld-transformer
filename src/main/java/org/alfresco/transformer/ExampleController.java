@@ -77,7 +77,7 @@ public class ExampleController extends AbstractTransformerController
         logger.info( getTransformerName() + " is starting up" );
         logger.info("-------------------------------------------" );
 
-        HW_DICTIONARY.put("english", "Hello, World! Hello, %s!");
+        HW_DICTIONARY.put("english", "Hello World! Hello %s!");
         HW_DICTIONARY.put("spanish", "¡Hola Mundo! ¡Hola %s!");
         HW_DICTIONARY.put("german",  "Hallo Welt! Hallo %s! ");
     }
@@ -100,7 +100,7 @@ public class ExampleController extends AbstractTransformerController
         // Simple transformation text -> html
         // See the description at https://github.com/Alfresco/alfresco-transform-core/blob/master/docs/Probes.md
         return new ProbeTestTransform(this, "quick.txt", "quick.html",
-                130, 10, 150, 1024,
+                200, 50, 150, 1024,
                 1,1)
         {
             @Override
