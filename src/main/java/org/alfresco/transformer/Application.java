@@ -43,7 +43,8 @@ public class Application
     private String containerName;
 
     @Bean
-    MeterRegistryCustomizer<MeterRegistry> metricsCommonTags() {
+    MeterRegistryCustomizer<MeterRegistry> metricsCommonTags()
+    {
         return registry -> registry.config().commonTags("containerName", containerName);
     }
 

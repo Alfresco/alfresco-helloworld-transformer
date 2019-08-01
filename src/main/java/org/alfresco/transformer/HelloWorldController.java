@@ -54,24 +54,24 @@ import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.http.MediaType.MULTIPART_FORM_DATA_VALUE;
 
 /**
- * Controller for handling requests to this example transformer. The transformer takes an input text file
+ * Controller for handling requests to the Hello World T-Engine. The T-Engine takes an input text file
  * containing a single name and a language parameter and transforms it into a HTML file.
- * For an input file containing the word "Tom" and language "English" this transformer will return a HTML file
+ * For an input file containing the word "Tom" and language "English" this T-Engine will return a HTML file
  * with body: "Hello, World! Hello, Tom!".
  * This example can say hello in 3 languages: English, Spanish and German.
  *
  */
 @Controller
-public class ExampleController extends AbstractTransformerController
+public class HelloWorldController extends AbstractTransformerController
 {
-    private static final Logger logger = LoggerFactory.getLogger(ExampleController.class);
+    private static final Logger logger = LoggerFactory.getLogger(HelloWorldController.class);
 
     private static final String HTML_TEMPLATE = "<!DOCTYPE html><html><head><meta charset=\"utf-8\">" +
             "<title>Hello World</title></head><body><h1 style=\"color:blue\">T-Engine Example</h1><p>%s</p></body></html>";
 
     private static final Map<String, String> HW_DICTIONARY = new HashMap<>();
 
-    public ExampleController()
+    public HelloWorldController()
     {
         logger.info("-------------------------------------------" );
         logger.info( getTransformerName() + " is starting up" );
@@ -82,46 +82,8 @@ public class ExampleController extends AbstractTransformerController
         HW_DICTIONARY.put("german",  "Hallo Welt! Hallo %s! ");
     }
 
-    @Override
-    public String getTransformerName()
-    {
-        return "Alfresco Example Transformer";
-    }
-
-    @Override
-    public String version()
-    {
-        return getTransformerName() + " available";
-    }
-
-    @Override
-    public ProbeTestTransform getProbeTestTransform()
-    {
-        // Simple transformation text -> html
-        // See the description at https://github.com/Alfresco/alfresco-transform-core/blob/master/docs/Probes.md
-        return new ProbeTestTransform(this, "quick.txt", "quick.html",
-                200, 50, 150, 1024,
-                1,1)
-        {
-            @Override
-            protected void executeTransformCommand(File sourceFile, File targetFile)
-            {
-                transformInternal(sourceFile, targetFile, "Spanish");
-            }
-        };
-    }
-
-    @Override
-    public void processTransform(File sourceFile, File targetFile, Map<String, String> transformOptions, Long timeout)
-    {
-        String language = transformOptions.get("language");
-        transformInternal(sourceFile, targetFile, language);
-    }
-
-
     /**
-     * This endpoint is called by ACS (Alfresco Content Repository) when a supported transformation is required.
-     * The endpoint can also be tested during development by using the
+     * This endpoint is called by ACS (Alfresco Content Repository) when a supported transformation is requested.
      *
      * @param request The original request
      * @param sourceMultipartFile ACS will always provide the source file
@@ -136,11 +98,11 @@ public class ExampleController extends AbstractTransformerController
                                               @RequestParam(value = "language") String language)
     {
 
-        logger.info("Performing transformation using " + getTransformerName() + ". language="+language );
+        logger.info("Performing transformation using " + getTransformerName() + ". Language="+language );
 
         // Prepare source and target files
         String targetFilename = createTargetFileName(sourceMultipartFile.getOriginalFilename(), targetExtension);
-        getProbeTestTransform().incrementTransformerCount(); // Some comment on this, do we need this for this hello world example?
+        getProbeTestTransform().incrementTransformerCount();
         File sourceFile = createSourceFile(request, sourceMultipartFile);
         File targetFile = createTargetFile(request, targetFilename);
 
@@ -153,6 +115,55 @@ public class ExampleController extends AbstractTransformerController
         long time = LogEntry.setStatusCodeAndMessage(OK.value(), "Success");
         getProbeTestTransform().recordTransformTime(time);
         return body;
+    }
+
+    /**
+     * This method is processes transform requests from a message queue,
+     * it performs the same transform as {@link #transform(HttpServletRequest, MultipartFile, String, String)}
+     * @param sourceFile The source file
+     * @param targetFile The target file
+     * @param transformOptions transformOptions such as the ones defined in resources/engine_config.json
+     * @param timeout The requested transform timeout value
+     */
+    @Override
+    public void processTransform(File sourceFile, File targetFile, Map<String, String> transformOptions, Long timeout)
+    {
+        String language = transformOptions.get("language");
+        transformInternal(sourceFile, targetFile, language);
+    }
+
+    /**
+     *
+     * Simple transform text -> html
+     * @see <a href="https://github.com/Alfresco/alfresco-transform-core/blob/master/docs/Probes.md">Probes.md</a>
+     * @return A quick transform used to check the health of the T-Engine
+     */
+    @Override
+    public ProbeTestTransform getProbeTestTransform()
+    {
+        //
+        return new ProbeTestTransform(this, "probe_test.txt", "probe_test.html",
+                180, 20, 150, 1024,
+                1,1)
+        {
+            @Override
+            protected void executeTransformCommand(File sourceFile, File targetFile)
+            {
+                transformInternal(sourceFile, targetFile, "Spanish");
+            }
+        };
+    }
+
+    @Override
+    public String getTransformerName()
+    {
+        return "Alfresco Hello World Transformer";
+    }
+
+    @Override
+    public String version()
+    {
+        return getTransformerName() + " available";
     }
 
     /**

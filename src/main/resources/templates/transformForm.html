@@ -2,15 +2,14 @@
 <body>
 
 	<div>
-        <h2>Example Transformer Test Transformation</h2>
+        <h2>Hello World Test Transform</h2>
 		<form method="POST" enctype="multipart/form-data" action="/transform">
 			<table>
                 <tr><td><div style="text-align:right">file *</div></td><td><input type="file" name="file" /></td></tr>
 				<tr><td><div style="text-align:right">language *</div></td><td><input type="text" name="language" value="" /></td></tr>
-                <tr><td><div style="text-align:right">targetExtension *</div></td><td><input type="text" name="targetExtension" value="html" /></td></tr>
-
 				<tr><td></td><td><input type="submit" value="Transform" /></td></tr>
 			</table>
+			<input type="hidden" name="targetExtension" value="html"/>
 		</form>
 	</div>
 

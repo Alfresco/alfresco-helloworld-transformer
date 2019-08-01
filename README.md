@@ -31,8 +31,9 @@ Execute the following command to run the transformer container in detached mode 
 docker run -d -p 8099:8090 --name alfresco-helloworld-transformer alfresco/alfresco-helloworld-transformer:latest
 ```
 
-*Note: Since this is a Spring Boot application,
-it might be helpful to run it as such during development by either executing `mvn spring-boot:run`
- or `java -jar target/alfresco-helloworld-transformer-{version}.jar` in the project directory*
+> Since this is a Spring Boot application,
+ it might be helpful to run it as such during development by either executing `mvn spring-boot:run`
+ or `java -jar target/alfresco-helloworld-transformer-{version}.jar` in the project directory.
+ The application will be accessible on port 8090.
 
 
