@@ -56,8 +56,8 @@ import static org.springframework.http.MediaType.MULTIPART_FORM_DATA_VALUE;
 /**
  * Controller for handling requests to the Hello World T-Engine. The T-Engine takes an input text file
  * containing a single name and a language parameter and transforms it into a HTML file.
- * For an input file containing the word "Tom" and language "English" this T-Engine will return a HTML file
- * with body: "Hello, World! Hello, Tom!".
+ * For an input file containing the name "Tom" and language "English" this T-Engine will return a HTML file
+ * with body: "Hello World! Hello Tom!".
  * This example can say hello in 3 languages: English, Spanish and German.
  *
  */
