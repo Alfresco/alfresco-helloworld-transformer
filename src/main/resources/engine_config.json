@@ -9,7 +9,7 @@
   "transformers":
   [
     {
-      "transformerName": "exampleTransformer",
+      "transformerName": "helloWorldTransformer",
       "supportedSourceAndTargetList":
       [
         {"sourceMediaType": "text/plain",  "targetMediaType": "text/html"  }
