@@ -1,7 +1,7 @@
 {
   "transformOptions":
   {
-    "exampleOptions":
+    "helloWorldOptions":
     [
       {"value": {"name": "language"}}
     ]
@@ -9,14 +9,14 @@
   "transformers":
   [
     {
-      "transformerName": "helloWorldTransformer",
+      "transformerName": "helloWorld",
       "supportedSourceAndTargetList":
       [
-        {"sourceMediaType": "text/plain",  "targetMediaType": "text/html"  }
+        {"sourceMediaType": "text/plain",  "maxSourceSizeBytes": 50, "targetMediaType": "text/html"  }
       ],
       "transformOptions":
       [
-        "exampleOptions"
+        "helloWorldOptions"
       ]
     }
   ]
