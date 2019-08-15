@@ -3,7 +3,7 @@
 ## Purpose
 This is an example Hello World transformer used to demonstrate how to create a simple transformer based on
 [alfresco-transform-core](https://github.com/Alfresco/alfresco-transform-core).
-The instructions to follow with this example can be found [here](https://actual.link.to.file.in.acs-packaging).
+The instructions to follow with this example can be found [here](https://github.com/Alfresco/acs-packaging/blob/master/docs/creating-a-t-engine.md).
 
 See the [parent project](https://github.com/Alfresco/alfresco-transform-core) for more information and instructions on how to build & run.
 
