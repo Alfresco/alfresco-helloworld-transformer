@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+          http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <bean id="transformer.HelloWorldTransformer"
+          class="org.alfresco.content.transform.HelloWorldTransformer"
+          parent="baseContentTransformer" >
+    </bean>
+
+    <bean id="renditionDefinitionHelloWorldRendition" class="org.alfresco.repo.rendition2.RenditionDefinition2Impl">
+        <constructor-arg name="renditionName" value="helloWorld"/>
+        <constructor-arg name="targetMimetype" value="text/html"/>
+        <constructor-arg name="transformOptions">
+            <map>
+                <entry key="language" value="German" />
+            </map>
+        </constructor-arg>
+        <constructor-arg name="registry" ref="renditionDefinitionRegistry2"/>
+    </bean>
+
+    <bean id="transformOptionsConverter" class="org.alfresco.repo.rendition2.HelloWorldOptionConverter">
+        <property name="maxSourceSizeKBytes" value="${system.thumbnail.definition.default.maxSourceSizeKBytes}" />
+        <property name="readLimitTimeMs" value="${system.thumbnail.definition.default.readLimitTimeMs}" />
+        <property name="readLimitKBytes" value="${system.thumbnail.definition.default.readLimitKBytes}" />
+        <property name="pageLimit" value="${system.thumbnail.definition.default.pageLimit}" />
+        <property name="maxPages" value="${system.thumbnail.definition.default.maxPages}" />
+    </bean>
+
+</beans>
