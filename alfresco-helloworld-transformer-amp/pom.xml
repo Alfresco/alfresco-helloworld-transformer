@@ -8,7 +8,7 @@
     <packaging>pom</packaging>
 
     <properties>
-        <dependency.alfresco-repository.version>7.110-SNAPSHOT</dependency.alfresco-repository.version>
+        <dependency.alfresco-repository.version>7.120</dependency.alfresco-repository.version>
         <dependency.fabric8.version>4.2.0</dependency.fabric8.version>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
