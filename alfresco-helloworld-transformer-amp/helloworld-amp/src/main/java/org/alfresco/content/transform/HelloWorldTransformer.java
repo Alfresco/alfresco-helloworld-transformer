@@ -16,7 +16,7 @@ import java.util.Map;
 public class HelloWorldTransformer extends AbstractContentTransformer2
 {
         @SuppressWarnings("unused")
-        private static final Log logger = LogFactory.getLog(HtmlParserContentTransformer.class);
+        private static final Log logger = LogFactory.getLog(HelloWorldTransformer.class);
         private static final Map<String, String> HW_DICTIONARY = new HashMap<>();
         private static final String HTML_TEMPLATE = "<!DOCTYPE html><html><head><meta charset=\"utf-8\">" +
                 "<title>Hello World</title></head><body><h1 style=\"color:blue\">T-Engine Example</h1><p>%s</p></body></html>";
