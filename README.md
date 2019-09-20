@@ -1,39 +1,20 @@
-# Alfresco Hello World Transformer
+# Alfresco Hello World Transformer Examples
 
 ## Purpose
-This is an example Hello World transformer used to demonstrate how to create a simple transformer based on
-[alfresco-transform-core](https://github.com/Alfresco/alfresco-transform-core).
-The instructions to follow with this example can be found [here](https://github.com/Alfresco/acs-packaging/blob/master/docs/creating-a-t-engine.md).
 
-See the [parent project](https://github.com/Alfresco/alfresco-transform-core) for more information and instructions on how to build & run.
+This repository contains two example Hello World Transformers. It is used in [migrating-a-legacy-transformer](https://github.com/Alfresco/acs-packaging/blob/master/docs/migrating-a-legacy-transformer.md)
+(in acs-packaging) to guide a developer through the process of taking an existing custom transformer and building
+a new one that will be compatible with future versions.
 
-## Prerequisites
-* Java 11
-* Maven
-* Docker
+In Alfresco Content Service 6.0.0, the Enterprise edition allowed transforms to run in separate docker containers,
+but they could still run within the content repository. With the deployment to Docker, the use of AMPs to extend
+Alfresco is being discouraged. There is also a need for both Enterprise and Community editions to share a common
+transform mechanism.
+With the release of Alfresco Content Service 6.2.0 both Community and Enterprise editions may use transforms in
+docker containers through a LocalTransformService. It replaces the older ContentService transformers (now named Legacy transforms)
+which may be removed in a future release.
+The new LocalTransformService takes advantages of moving the Transformation to a different process (docker container)
+bringing all of the advantages of using docker containers and a much simpler way of developing and configuring a custom Transformer.
 
-## Build using Maven
-The project can be built by running the Maven command:
-```bash
-mvn clean install -Plocal
-```
-This will build the project as a Spring Boot fat jar in the {project directory}/target folder
-and as a docker image in the local docker registry.
-
-Before proceeding to start the container, confirm that the build was successful and the local docker
-registry contains **alfresco/alfresco-helloworld-transformer** image.
-
-## Run in Docker
-
-Execute the following command to run the transformer container in detached mode on port 8090:
-
-```bash
-docker run -d -p 8090:8090 --name alfresco-helloworld-transformer alfresco/alfresco-helloworld-transformer:latest
-```
-
-> Since this is a Spring Boot application,
- it might be helpful to run it as such during development by either executing `mvn spring-boot:run`
- or `java -jar target/alfresco-helloworld-transformer-{version}.jar` in the project directory.
- The application will be accessible on port 8090.
-
-
+* [Alfresco Hello-World Transformer AMP](alfresco-helloworld-transformer-amp/).
+* [Alfresco Hello-World Transformer T-engine](alfresco-helloworld-transformer-engine/).
