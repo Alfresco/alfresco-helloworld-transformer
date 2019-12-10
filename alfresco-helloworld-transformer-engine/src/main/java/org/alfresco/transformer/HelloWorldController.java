@@ -126,7 +126,8 @@ public class HelloWorldController extends AbstractTransformerController
      * @param timeout The requested transform timeout value
      */
     @Override
-    public void processTransform(File sourceFile, File targetFile, Map<String, String> transformOptions, Long timeout)
+    public void processTransform(File sourceFile, File targetFile, String sourceMimetype, String targetMimetype,
+        Map<String, String> transformOptions, Long timeout)
     {
         String language = transformOptions.get("language");
         transformInternal(sourceFile, targetFile, language);
