@@ -2,7 +2,7 @@
  * #%L
  * Alfresco Transform Core
  * %%
- * Copyright (C) 2005 - 2019 Alfresco Software Limited
+ * Copyright (C) 2005 - 2020 Alfresco Software Limited
  * %%
  * This file is part of the Alfresco software.
  * -
@@ -27,31 +27,19 @@
 package org.alfresco.transformer;
 
 import org.alfresco.transform.exceptions.TransformException;
-import org.alfresco.transformer.logging.LogEntry;
 import org.alfresco.transformer.probes.ProbeTestTransform;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.core.io.Resource;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.nio.file.Files;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.alfresco.transformer.fs.FileManager.createAttachment;
-import static org.alfresco.transformer.fs.FileManager.createSourceFile;
-import static org.alfresco.transformer.fs.FileManager.createTargetFile;
-import static org.alfresco.transformer.fs.FileManager.createTargetFileName;
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
-import static org.springframework.http.HttpStatus.OK;
-import static org.springframework.http.MediaType.MULTIPART_FORM_DATA_VALUE;
 
 /**
  * Controller for handling requests to the Hello World T-Engine. The T-Engine takes an input text file
@@ -59,7 +47,6 @@ import static org.springframework.http.MediaType.MULTIPART_FORM_DATA_VALUE;
  * For an input file containing the name "Tom" and language "English" this T-Engine will return a HTML file
  * with body: "Hello World! Hello Tom!".
  * This example can say hello in 3 languages: English, Spanish and German.
- *
  */
 @Controller
 public class HelloWorldController extends AbstractTransformerController
@@ -83,58 +70,6 @@ public class HelloWorldController extends AbstractTransformerController
     }
 
     /**
-     * This endpoint is called by ACS (Alfresco Content Repository) when a supported transformation is requested.
-     *
-     * @param request The original request
-     * @param sourceMultipartFile ACS will always provide the source file
-     * @param targetExtension ACS will always provide the target extension
-     * @param language ACS will provide any additional parameters defined as options in resources/engine_config.json
-     * @return response body including the result of the transformation
-     */
-    @PostMapping(value = "/transform", consumes = MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<Resource> transform(HttpServletRequest request,
-                                              @RequestParam("file") MultipartFile sourceMultipartFile,
-                                              @RequestParam(value = "targetExtension") String targetExtension,
-                                              @RequestParam(value = "language") String language)
-    {
-
-        logger.info("Performing transformation using " + getTransformerName() + ". Language="+language );
-
-        // Prepare source and target files
-        String targetFilename = createTargetFileName(sourceMultipartFile.getOriginalFilename(), targetExtension);
-        getProbeTestTransform().incrementTransformerCount();
-        File sourceFile = createSourceFile(request, sourceMultipartFile);
-        File targetFile = createTargetFile(request, targetFilename);
-
-        // Do the transformation
-        transformInternal(sourceFile, targetFile, language);
-
-        // Prepare the response
-        final ResponseEntity<Resource> body = createAttachment(targetFilename, targetFile);
-        LogEntry.setTargetSize(targetFile.length());
-        long time = LogEntry.setStatusCodeAndMessage(OK.value(), "Success");
-        getProbeTestTransform().recordTransformTime(time);
-        return body;
-    }
-
-    /**
-     * This method is processes transform requests from a message queue,
-     * it performs the same transform as {@link #transform(HttpServletRequest, MultipartFile, String, String)}
-     * @param sourceFile The source file
-     * @param targetFile The target file
-     * @param transformOptions transformOptions such as the ones defined in resources/engine_config.json
-     * @param timeout The requested transform timeout value
-     */
-    @Override
-    public void processTransform(File sourceFile, File targetFile, String sourceMimetype, String targetMimetype,
-        Map<String, String> transformOptions, Long timeout)
-    {
-        String language = transformOptions.get("language");
-        transformInternal(sourceFile, targetFile, language);
-    }
-
-    /**
-     *
      * Simple transform text -> html
      * @see <a href="https://github.com/Alfresco/alfresco-transform-core/blob/master/docs/Probes.md">Probes.md</a>
      * @return A quick transform used to check the health of the T-Engine
@@ -150,7 +85,8 @@ public class HelloWorldController extends AbstractTransformerController
             @Override
             protected void executeTransformCommand(File sourceFile, File targetFile)
             {
-                transformInternal(sourceFile, targetFile, "Spanish");
+                Map<String, String> transformOptions = Collections.singletonMap("language", "Spanish");
+                transformImpl("helloWorld", "text/plain", "text/html", transformOptions, sourceFile, targetFile);
             }
         };
     }
@@ -168,15 +104,20 @@ public class HelloWorldController extends AbstractTransformerController
     }
 
     /**
-     *
      * The actual transformation code.
      *
+     * @param transformName - will always be {@code "helloWorld"} as there is only one transformer defined in the
+     *                        {@code engine_config.json}.
+     * @param sourceMimetype - the media type of the source {@code "text/plain"}
+     * @param targetMimetype - the media type to be generated {@code "text/html"}
+     * @param transformOptions - options that have been supplied to the transformer
      * @param sourceFile - The received source file
      * @param targetFile - The target file representing the result of the transformation
-     * @param language - The language to say hello in
      */
-    private void transformInternal(File sourceFile, File targetFile, String language)
+    @Override
+    public void transformImpl(String transformName, String sourceMimetype, String targetMimetype, Map<String, String> transformOptions, File sourceFile, File targetFile)
     {
+        String language = transformOptions.get("language");
         String greeting = HW_DICTIONARY.get(language.toLowerCase());
 
         if (greeting == null)

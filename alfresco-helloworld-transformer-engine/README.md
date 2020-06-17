@@ -25,10 +25,11 @@ registry contains **alfresco/alfresco-helloworld-transformer** image.
 
 ## Run in Docker
 
-Execute the following command to run the transformer container in detached mode on port 8090:
+Execute the following commands to run the transformer container in detached mode on port 8090 and to show the logs:
 
 ```bash
 docker run -d -p 8090:8090 --name alfresco-helloworld-transformer alfresco/alfresco-helloworld-transformer:latest
+docker logs -f alfresco-helloworld-transformer
 ```
 
 > Since this is a Spring Boot application,
