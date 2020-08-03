@@ -37,4 +37,14 @@ docker logs -f alfresco-helloworld-transformer
  or `java -jar target/alfresco-helloworld-transformer-{version}.jar` in the project directory.
  The application will be accessible on port 8090.
 
+## Additional notes
 
+##### Using custom package names
+The Hello World example uses Spring dependency injection to wire beans.
+For this to work, Spring component scan needs to include the 'org.alfresco.transformer' package, which it does by default.
+It is ok to change this package name, but the 'org.alfresco.transformer' will need to be added back for
+component scanning. Spring provides several ways to do this, one of which is to add @ComponentScan annotation
+to the Application with the new package and the 'org.alfresco.transformer' package configured for component scanning.
+
+##### Issues with fabric8-maven-plugin
+Ensure that the Docker installation has Docker Experimental Features enabled.
