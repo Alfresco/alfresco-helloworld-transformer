@@ -75,7 +75,7 @@
                         <executions>
                             <execution>
                                 <id>build-image</id>
-                                <phase>install</phase>
+                                <phase>package</phase>
                                 <goals>
                                     <goal>build</goal>
                                 </goals>
