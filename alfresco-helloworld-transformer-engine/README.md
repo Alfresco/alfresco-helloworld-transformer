@@ -37,6 +37,12 @@ docker logs -f alfresco-helloworld-transformer
  or `java -jar target/alfresco-helloworld-transformer-{version}.jar` in the project directory.
  The application will be accessible on port 8090.
 
+The transformation configuration is defined in [engine_config.json](src/main/resources/engine_config.json) and requires a source *.txt file
+which is no more than 50 bytes in size. If you attempt to upload a larger file then the TransformController will log an error:
+```
+No transforms were able to handle the request
+```
+
 ## Additional notes
 
 ##### Using custom package names
