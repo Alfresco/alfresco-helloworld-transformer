@@ -1,6 +1,6 @@
 # Image provides a container in which to run the example Hello World docker transformer.
 
-FROM alfresco/alfresco-base-java:11.0.1-openjdk-centos-7-6784d76a7b81
+FROM alfresco/alfresco-base-java:11.0.13-centos-7@sha256:c1e399d1bbb5d08e0905f1a9ef915ee7c5ea0c0ede11cc9bd7ca98532a9b27fa
 
 ENV JAVA_OPTS=""
 
