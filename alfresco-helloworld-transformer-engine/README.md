@@ -43,6 +43,45 @@ which is no more than 50 bytes in size. If you attempt to upload a larger file t
 No transforms were able to handle the request
 ```
 
+## Deploy in Docker Compose
+
+When using Local Transformer, add following lines in your `docker-compose.yml` file.
+
+```
+services:
+    alfresco:
+        environment:
+            JAVA_OPTS : '
+                -DlocalTransform.helloworld.url=http://transform-helloworld:8090/
+            '
+    transform-helloworld:
+        image: alfresco/alfresco-helloworld-transformer:latest
+```
+
+When using Transform Service, add following lines in your `docker-compose.yml` file.
+
+```
+services:
+  transform-router:
+    image: quay.io/alfresco/alfresco-transform-router:1.5.1
+    environment:
+      JAVA_OPTS: " -XX:MinRAMPercentage=50 -XX:MaxRAMPercentage=80"
+      ACTIVEMQ_URL: "nio://activemq:61616"
+      CORE_AIO_URL: "http://transform-core-aio:8090"
+      TRANSFORMER_URL_HELLOWORLD: "http://transform-helloworld:8090"
+      TRANSFORMER_QUEUE_HELLOWORD: "org.alfresco.transform.engine.example.acs"
+      FILE_STORE_URL: "http://shared-file-store:8099/alfresco/api/-default-/private/sfs/versions/1/file"
+
+  transform-helloworld:
+      image: alfresco/alfresco-helloworld-transformer:latest
+      environment:
+        JAVA_OPTS: " -XX:MinRAMPercentage=50 -XX:MaxRAMPercentage=80"
+        ACTIVEMQ_URL: "nio://activemq:61616"
+        FILE_STORE_URL: "http://shared-file-store:8099/alfresco/api/-default-/private/sfs/versions/1/file"
+```
+
+>> Note that default `org.alfresco.transform.engine.example.acs` queue name is used, since you can also customize this value using the `TRANSFORM_ENGINE_REQUEST_QUEUE` environment variable.
+
 ## Additional notes
 
 ##### Using custom package names
