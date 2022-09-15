@@ -1,0 +1,23 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+	<div>
+        <h2>Hello World Test Transform</h2>
+		<form method="POST" enctype="multipart/form-data" action="/transform">
+			<table>
+                <tr><td><div style="text-align:right">file (max size: 50 bytes) *</div></td><td><input type="file" name="file" /></td></tr>
+				<tr><td><div style="text-align:right">language *</div></td><td><input type="text" name="language" value="spanish" /></td></tr>
+				<tr><td><div style="text-align:right">sourceMimetype *</div></td><td><input type="text" name="sourceMimetype" value="text/plain" /></td></tr>
+				<tr><td><div style="text-align:right">targetMimetype *</div></td><td><input type="text" name="targetMimetype" value="text/html" /></td></tr>
+				<tr><td></td><td><input type="submit" value="Transform" /></td></tr>
+			</table>
+			<input type="hidden" name="targetExtension" value="html"/>
+		</form>
+	</div>
+
+    <div>
+        <a href="/log">Log entries</a>
+    </div>
+
+</body>
+</html>

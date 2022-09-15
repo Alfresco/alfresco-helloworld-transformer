@@ -1,20 +1,20 @@
 # Alfresco Hello World Transformer Examples
 
-## Purpose
+This repository contains three example Hello World Transformers:
 
-This repository contains two example Hello World Transformers. It is used in [migrating-a-legacy-transformer](https://github.com/Alfresco/acs-packaging/blob/master/docs/migrating-a-legacy-transformer.md)
-(in acs-packaging) to guide a developer through the process of taking an existing custom transformer and building
-a new one that will be compatible with future versions.
+* [Alfresco Hello-World Transformer AMP](alfresco-helloworld-transformer-amp/) a legacy transformer as an AMP;
+* [Alfresco Hello-World Transformer T-engine](alfresco-helloworld-transformer-engine/) a T-Engine that
+  extends the deprecated `alfresco-transformer-base`;
+* [Hello-World T-Engine](helloworld-t-engine/) a T-Engine that extends the
+  `alfresco-base-t-engine`.
 
-In Alfresco Content Service 6.0.0, the Enterprise edition allowed transforms to run in separate docker containers,
-but they could still run within the content repository. With the deployment to Docker, the use of AMPs to extend
-Alfresco is being discouraged. There is also a need for both Enterprise and Community editions to share a common
-transform mechanism.
-With the release of Alfresco Content Service 6.2.0 both Community and Enterprise editions may use transforms in
-docker containers through a LocalTransformService. It replaces the older ContentService transformers (now named Legacy transforms)
-which may be removed in a future release.
-The new LocalTransformService takes advantages of moving the Transformation to a different process (docker container)
-bringing all of the advantages of using docker containers and a much simpler way of developing and configuring a custom Transformer.
+In Alfresco Content Service 6.0, the Enterprise edition allowed transforms to run in separate docker containers,
+known as T-Engines. Transforms could still run within the content repository itself, now named Legacy transforms.
 
-* [Alfresco Hello-World Transformer AMP](alfresco-helloworld-transformer-amp/).
-* [Alfresco Hello-World Transformer T-engine](alfresco-helloworld-transformer-engine/).
+In Alfresco Content Service 6.2 both Community and Enterprise editions were able to
+use transforms in docker containers in addition to legacy transforms.
+
+In ACS 7.0.0, Legacy transforms were removed.
+
+The `alfresco-base-t-engine` simplifies the creation of T-Engines. It was introduced as a
+module of `alfresco-transform-core` 3.0.0.

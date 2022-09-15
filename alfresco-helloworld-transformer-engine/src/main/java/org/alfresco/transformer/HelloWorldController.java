@@ -42,12 +42,15 @@ import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 
 /**
+ * @deprecated use the newer helloworld-t-engine example if possible.
+ *
  * Controller for handling requests to the Hello World T-Engine. The T-Engine takes an input text file
  * containing a single name and a language parameter and transforms it into a HTML file.
  * For an input file containing the name "Tom" and language "English" this T-Engine will return a HTML file
  * with body: "Hello World! Hello Tom!".
  * This example can say hello in 3 languages: English, Spanish and German.
  */
+@Deprecated
 @Controller
 public class HelloWorldController extends AbstractTransformerController
 {

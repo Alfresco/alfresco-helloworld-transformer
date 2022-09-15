@@ -1,0 +1,23 @@
+{
+  "transformOptions":
+  {
+    "helloWorldOptions":
+    [
+      {"value": {"name": "language"}}
+    ]
+  },
+  "transformers":
+  [
+    {
+      "transformerName": "helloWorld",
+      "supportedSourceAndTargetList":
+      [
+        {"sourceMediaType": "text/plain",  "maxSourceSizeBytes": 50, "targetMediaType": "text/html"  }
+      ],
+      "transformOptions":
+      [
+        "helloWorldOptions"
+      ]
+    }
+  ]
+}
