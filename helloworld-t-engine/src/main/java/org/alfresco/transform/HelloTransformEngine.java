@@ -35,10 +35,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
- * The Hello World T-Engine contains just one CustomTransformer called {@code "hello"}. It takes an input text file
- * containing a name and a language as a transform option, which it transforms it into a HTML file.
- * For an input file containing the name {@code "Tom"} and language {@code "English"} it will return an HTML file
- * with body: {@code "Hello World! Hello Tom!"}. This example can say hello in 3 languages: English, Spanish and German.
+ * The Hello World T-Engine contains just one CustomTransformer called {@code "helloWorld"}. It takes input text
+ * containing a name and a language as a transform option, which it transforms it into HTML.
+ * For an input file containing the name {@code "Tom"} and language {@code "English"} it will return HTML with the
+ * body: {@code "Hello World! Hello Tom!"}. This example can say hello in 3 languages: English, Spanish and German.
  */
 @Component
 public class HelloTransformEngine implements TransformEngine

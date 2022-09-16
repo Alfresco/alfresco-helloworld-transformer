@@ -1,6 +1,7 @@
-
 # Alfresco Hello World Transformer AMP  
-  
+
+> **WARNING: THIS SYTLE OF TRANSFORMER IS NO LONGER SUPPORTED FROM ACS 7.0 ONWARDS**
+
 ## Purpose
 This is an example Hello World transformer AMP used to demonstrate the legacy mechanism of adding custom 
 Transformers or Renditions to alfresco-content-repository. However this is a bare-bones AMP, it has no

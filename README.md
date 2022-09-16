@@ -2,11 +2,11 @@
 
 This repository contains three example Hello World Transformers:
 
-* [Alfresco Hello-World Transformer AMP](alfresco-helloworld-transformer-amp/) a legacy transformer as an AMP;
-* [Alfresco Hello-World Transformer T-engine](alfresco-helloworld-transformer-engine/) a T-Engine that
-  extends the deprecated `alfresco-transformer-base`;
 * [Hello-World T-Engine](helloworld-t-engine/) a T-Engine that extends the
-  `alfresco-base-t-engine`.
+  `alfresco-base-t-engine`;
+* [Alfresco Hello-World Transformer T-engine](alfresco-helloworld-transformer-engine/) a T-Engine that
+  extends the deprecated [alfresco-transformer-base](https://github.com/Alfresco/alfresco-transform-core/blob/master/deprecated/alfresco-transformer-base/);
+* [Alfresco Hello-World Transformer AMP](alfresco-helloworld-transformer-amp/) a legacy transformer as an AMP.
 
 In Alfresco Content Service 6.0, the Enterprise edition allowed transforms to run in separate docker containers,
 known as T-Engines. Transforms could still run within the content repository itself, now named Legacy transforms.

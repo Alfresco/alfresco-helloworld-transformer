@@ -19,7 +19,7 @@ This will build the project as a Spring Boot fat jar in the target folder
 and as a docker image in the local docker registry.
 
 Before proceeding to start the container, confirm that the build was successful and the local docker
-registry contains **alfresco/helloworld-t-engine** image.
+registry contains the **alfresco/helloworld-t-engine** image.
 
 ## Run in Docker
 
@@ -59,11 +59,9 @@ mimetype (`text/html` or select `html`).
 ## Additional notes
 
 ##### Using custom package names
-The Hello World example uses Spring dependency injection to wire beans.
-For this to work, Spring component scan needs to include the 'org.alfresco.transform' package, which it does by default.
-It is ok to change this package name, but the 'org.alfresco.transformer' will need to be added back for
-component scanning. Spring provides several ways to do this, one of which is to add @ComponentScan annotation
-to the Application with the new package and the 'org.alfresco.transformer' package configured for component scanning.
+The base T-Engine uses Spring dependency injection to auto wire beans. By default, only the
+`org.alfresco.transform` package and sub-packages are scanned. Spring provides [several](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/context/annotation/ComponentScan.html)
+ways to add additional packages if you don't wish to use this package for your own components.
 
 ##### Issues with fabric8-maven-plugin
 Ensure that the Docker installation has Docker Experimental Features enabled.

@@ -3,9 +3,8 @@
 > **WARNING: THIS PROJECT USES THE DEPRECATED [alfresco-transformer-base](https://github.com/Alfresco/alfresco-transform-core/blob/master/deprecated/alfresco-transformer-base/) PROJECT.**
 
 ## Purpose
-This example show that it is still possible to use the deprecated
-[alfresco-transformer-base](https://github.com/Alfresco/alfresco-transform-core/blob/master/deprecated/alfresco-transformer-base/)
-and pick up security and bug fixes that may be available in later versions.
+This example show that it is still possible to use the deprecated `alfresco-transformer-base`
+in order to pick up security and bug fixes that may be available in later versions.
 
 ## Prerequisites
 * Java 11
