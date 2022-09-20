@@ -1,11 +1,10 @@
-# Alfresco Hello World Transformer Engine
+# DEPRECATED: Alfresco Hello World Transformer Engine
+
+> **WARNING: THIS PROJECT USES THE DEPRECATED [alfresco-transformer-base](https://github.com/Alfresco/alfresco-transform-core/blob/master/deprecated/alfresco-transformer-base/) PROJECT.**
 
 ## Purpose
-This is an example Hello World transformer used to demonstrate how to create a simple transformer based on
-[alfresco-transform-core](https://github.com/Alfresco/alfresco-transform-core).
-The instructions to follow with this example can be found [here](https://github.com/Alfresco/acs-packaging/blob/master/docs/creating-a-t-engine.md).
-
-See the [parent project](https://github.com/Alfresco/alfresco-transform-core) for more information and instructions on how to build & run.
+This example show that it is still possible to use the deprecated `alfresco-transformer-base`
+in order to pick up security and bug fixes that may be available in later versions.
 
 ## Prerequisites
 * Java 11
@@ -17,7 +16,7 @@ The project can be built by running the Maven command:
 ```bash
 mvn clean install -Plocal
 ```
-This will build the project as a Spring Boot fat jar in the {project directory}/target folder
+This will build the project as a Spring Boot fat jar in the target folder
 and as a docker image in the local docker registry.
 
 Before proceeding to start the container, confirm that the build was successful and the local docker
