@@ -1,6 +1,6 @@
 # Image provides a container in which to run the example Hello World docker transformer.
 
-FROM alfresco/alfresco-base-java:jre17-rockylinux8-202209261621
+FROM alfresco/alfresco-base-java:jre17-rockylinux8-202302221525
 
 ENV JAVA_OPTS=""
 
