@@ -88,4 +88,44 @@
             </build>
         </profile>
     </profiles>
+    
+     <!-- Alfresco Maven Repositories -->
+	<repositories>
+		<repository>
+			<id>alfresco-public</id>
+			<url>https://artifacts.alfresco.com/nexus/content/groups/public</url>
+		</repository>
+		<repository>
+			<id>alfresco-public-snapshots</id>
+			<url>https://artifacts.alfresco.com/nexus/content/groups/public-snapshots</url>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>daily</updatePolicy>
+			</snapshots>
+		</repository>
+		<!-- Alfresco Enterprise Edition Artifacts, put username/pwd for server 
+			in settings.xml -->
+		<repository>
+			<id>alfresco-private-repository</id>
+			<url>https://artifacts.alfresco.com/nexus/content/groups/private</url>
+		</repository>
+		<repository>
+			<id>alfresco-internal</id>
+			<url>https://artifacts.alfresco.com/nexus/content/groups/internal</url>
+		</repository>
+	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>alfresco-plugin-public</id>
+			<url>https://artifacts.alfresco.com/nexus/content/groups/public</url>
+		</pluginRepository>
+		<pluginRepository>
+			<id>alfresco-plugin-public-snapshots</id>
+			<url>https://artifacts.alfresco.com/nexus/content/groups/public-snapshots</url>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>daily</updatePolicy>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
 </project>
